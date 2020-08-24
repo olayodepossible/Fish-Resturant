@@ -268,7 +268,7 @@ header.top {
   text-align: center;
 }
 header.top h1 {
-  font-size: 3rem;
+  font-size: 3.5rem;
   line-height: 0.7;
   display: -webkit-box;
   display: flex;
@@ -278,14 +278,14 @@ header.top h1 {
 header.top h1 .ofThe {
   display: -webkit-box;
   display: flex;
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: #f5a623;
   -webkit-box-pack: center;
   justify-content: center;
   -webkit-box-align: center;
   align-items: center;
   background: url("/img/anchor.svg") center no-repeat;
-  background-size: 2.5rem;
+  background-size: 3rem;
   padding: 0 1rem;
 }
 header.top h1 .ofThe .of {
