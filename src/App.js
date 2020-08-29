@@ -8,9 +8,11 @@ import sampleFishes from "./sample-fishes";
 import base from "./base";
 
 function App(props) {
-  const [fishes, setFishes] = useState({});
-  const [order, setOrder] = useState({});
   const params = props.match;
+  const [fishes, setFishes] = useState({});
+  const [order, setOrder] = useState(
+    JSON.parse(localStorage.getItem(params.storeId)) || {}
+  );
 
   useEffect(() => {
     const ref = base.syncState(`${params.storeId}/fishes`, {
@@ -32,11 +34,19 @@ function App(props) {
     setFishes({ ...spreadFishes });
   };
 
-  // Load Sample Fishes
-  const loadSampleFishes = () => {
-    setFishes({ ...fishes, ...sampleFishes });
+  const updateFish = (key, updatedFish) => {
+    const updatedFishes = { ...fishes, [key]: updatedFish };
+    setFishes(updatedFishes);
     base.post(`${params.storeId}/fishes`, {
-      data: { ...fishes, ...sampleFishes },
+      data: updatedFishes,
+    });
+  };
+
+  const deleteFish = (key) => {
+    const updatedFishes = { ...fishes, [key]: null };
+    setFishes(updatedFishes);
+    base.post(`${params.storeId}/fishes`, {
+      data: updatedFishes,
     });
   };
 
@@ -44,6 +54,20 @@ function App(props) {
     const spreadOrder = { ...order };
     spreadOrder[key] = spreadOrder[key] + 1 || 1;
     setOrder({ ...spreadOrder });
+  };
+
+  const deleteOrder = (key) => {
+    const orders = { ...order };
+    delete orders[key];
+    setOrder(orders);
+  };
+
+  // Load Sample Fishes
+  const loadSampleFishes = () => {
+    setFishes({ ...fishes, ...sampleFishes });
+    base.post(`${params.storeId}/fishes`, {
+      data: { ...fishes, ...sampleFishes },
+    });
   };
 
   return (
@@ -61,8 +85,14 @@ function App(props) {
           ))}
         </ul>
       </div>
-      <Order fishes={fishes} order={order} />
-      <Inventory addFish={addFish} loadSampleFishes={loadSampleFishes} />
+      <Order fishes={fishes} order={order} deleteOrder={deleteOrder} />
+      <Inventory
+        addFish={addFish}
+        updateFish={updateFish}
+        deleteFish={deleteFish}
+        loadSampleFishes={loadSampleFishes}
+        fishes={fishes}
+      />
     </div>
   );
 }
