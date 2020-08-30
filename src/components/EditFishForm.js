@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const EditFishForm = (props) => {
   const handleChange = (event) => {
@@ -47,4 +48,15 @@ const EditFishForm = (props) => {
   );
 };
 
+EditFishForm.propTypes = {
+  fish: PropTypes.shape({
+    name: PropTypes.string,
+    image: PropTypes.string,
+    desc: PropTypes.string,
+    status: PropTypes.string,
+    price: PropTypes.number,
+  }),
+  index: PropTypes.string,
+  updateFish: PropTypes.func,
+};
 export default EditFishForm;

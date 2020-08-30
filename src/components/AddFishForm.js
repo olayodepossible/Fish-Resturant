@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "props-types";
 
 const AddFishForm = (props) => {
   const nameRef = React.createRef();
@@ -6,6 +7,7 @@ const AddFishForm = (props) => {
   const statusRef = React.createRef();
   const descRef = React.createRef();
   const imageRef = React.createRef();
+
   const createFish = (event) => {
     event.preventDefault();
     const fish = {
@@ -32,6 +34,10 @@ const AddFishForm = (props) => {
       <button type="submit">+ Add Fish</button>
     </form>
   );
+};
+
+AddFishForm.propTypes = {
+  addFish: PropTypes.func,
 };
 
 export default AddFishForm;

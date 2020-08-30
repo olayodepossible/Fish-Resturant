@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import "./css/App.css";
 import Header from "./components/Header";
 import Order from "./components/Order";
@@ -8,7 +9,7 @@ import sampleFishes from "./sample-fishes";
 import base from "./base";
 
 function App(props) {
-  const params = props.match;
+  const { params } = props.match;
   const [fishes, setFishes] = useState({});
   const [order, setOrder] = useState(
     JSON.parse(localStorage.getItem(params.storeId)) || {}
@@ -96,5 +97,9 @@ function App(props) {
     </div>
   );
 }
+
+App.prototype = {
+  match: PropTypes.object,
+};
 
 export default App;
