@@ -58,5 +58,6 @@ EditFishForm.propTypes = {
   }),
   index: PropTypes.string,
   updateFish: PropTypes.func,
+  deleteFish: PropTypes.func,
 };
 export default EditFishForm;

@@ -93,6 +93,7 @@ function App(props) {
         deleteFish={deleteFish}
         loadSampleFishes={loadSampleFishes}
         fishes={fishes}
+        storeId={params.storeId}
       />
     </div>
   );
